@@ -715,6 +715,8 @@ static u32 read_timestamp_frequency(struct drm_i915_private *dev_priv)
 	u32 f19_2_mhz = 19200;
 	u32 f24_mhz = 24000;
 
+	printk("**dw_debug:: getting in %s\n", __func__);
+
 	if (INTEL_GEN(dev_priv) <= 4) {
 		/* PRMs say:
 		 *
@@ -763,12 +765,16 @@ static u32 read_timestamp_frequency(struct drm_i915_private *dev_priv)
 		} else {
 			u32 rpm_config_reg = I915_READ(RPM_CONFIG0);
 
+			printk("**dw_debug:: %s RPM_CONFIG0 value is 0x%lx\n", __func__, rpm_config_reg);
+
 			if (INTEL_GEN(dev_priv) <= 10)
 				freq = gen10_get_crystal_clock_freq(dev_priv,
 								rpm_config_reg);
 			else
 				freq = gen11_get_crystal_clock_freq(dev_priv,
 								rpm_config_reg);
+
+			printk("**dw_debug:: %s frequency = %d\n", __func__, freq);
 
 			/* Now figure out how the command stream's timestamp
 			 * register increments from this frequency (it might
@@ -777,6 +783,8 @@ static u32 read_timestamp_frequency(struct drm_i915_private *dev_priv)
 			freq >>= 3 - ((rpm_config_reg &
 				       GEN10_RPM_CONFIG0_CTC_SHIFT_PARAMETER_MASK) >>
 				      GEN10_RPM_CONFIG0_CTC_SHIFT_PARAMETER_SHIFT);
+
+			printk("**dw_debug:: %s frequency shifted = %d\n", __func__, freq);
 		}
 
 		return freq;
