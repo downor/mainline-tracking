@@ -275,7 +275,7 @@
 /* frequency for checking whether the OA unit has written new reports to the
  * circular OA buffer...
  */
-#define POLL_FREQUENCY 200
+#define POLL_FREQUENCY 20
 #define POLL_PERIOD (NSEC_PER_SEC / POLL_FREQUENCY)
 
 /* for sysctl proc_dointvec_minmax of dev.i915.perf_stream_paranoid */
