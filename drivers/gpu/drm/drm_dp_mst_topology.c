@@ -1913,6 +1913,8 @@ drm_dp_mst_handle_link_address_port(struct drm_dp_mst_branch *mstb,
 	int old_pdt = 0;
 	int old_ddps = 0;
 
+	DRM_DEBUG_KMS("**dw_debug::entering\n");
+
 	port = drm_dp_get_port(mstb, port_msg->port_number);
 	if (!port) {
 		port = kzalloc(sizeof(*port), GFP_KERNEL);
@@ -4208,6 +4210,8 @@ int drm_dp_mst_topology_mgr_init(struct drm_dp_mst_topology_mgr *mgr,
 				 int max_payloads, int conn_base_id)
 {
 	struct drm_dp_mst_topology_state *mst_state;
+
+	DRM_DEBUG_KMS("**dw_debug::entering\n");
 
 	mutex_init(&mgr->lock);
 	mutex_init(&mgr->qlock);

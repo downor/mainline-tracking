@@ -520,6 +520,8 @@ static struct drm_connector *intel_dp_add_mst_connector(struct drm_dp_mst_topolo
 	enum pipe pipe;
 	int ret;
 
+	DRM_DEBUG_KMS("**dw_debug::entering\n");
+
 	intel_connector = intel_connector_alloc();
 	if (!intel_connector)
 		return NULL;
@@ -578,6 +580,7 @@ static void intel_dp_register_mst_connector(struct drm_connector *connector)
 {
 	struct drm_i915_private *dev_priv = to_i915(connector->dev);
 
+	DRM_DEBUG_KMS("**dw_debug::entering\n");
 	if (dev_priv->fbdev)
 		drm_fb_helper_add_one_connector(&dev_priv->fbdev->helper,
 						connector);
@@ -692,6 +695,7 @@ intel_dp_mst_encoder_init(struct intel_digital_port *intel_dig_port, int conn_ba
 
 	/* create encoders */
 	intel_dp_create_fake_mst_encoders(intel_dig_port);
+	DRM_DEBUG_KMS("**dw_debug::doing drm_dp_mst_topology_mgr_init\n");
 	ret = drm_dp_mst_topology_mgr_init(&intel_dp->mst_mgr, &i915->drm,
 					   &intel_dp->aux, 16, 3, conn_base_id);
 	if (ret)
